@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import generate from "./GenDoc";
 
 import "./styles.css";
 
@@ -17,16 +18,7 @@ const InputField = React.forwardRef((props, ref) => {
   } = useField(field, fieldOptions);
 
   // Build the field
-  return (
-    <>
-      <input {...getInputProps({ ref, ...rest })} />
-
-      {/*
-        Let's inline some validation and error information
-        for our field
-      */}
-    </>
-  );
+  return <input {...getInputProps({ ref, ...rest })} />;
 });
 
 function App() {
@@ -56,6 +48,7 @@ function App() {
     onSubmit: async (values, instance) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(values);
+      generate(values["name"]);
     },
     debugForm: true
   });
@@ -67,7 +60,7 @@ function App() {
           Name:{" "}
           <InputField
             field="name"
-            validate={(value) => (!value ? "Required" : false)}
+            //validate={(value) => (!value ? "Required" : false)}
           />
         </label>
       </div>
