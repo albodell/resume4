@@ -18,6 +18,10 @@ button {
 }
 
 textarea {
-  width: 300px;
+  display: block;
+  width: 500px;
   height: 150px;
+}
+label {
+  display: block;
 }

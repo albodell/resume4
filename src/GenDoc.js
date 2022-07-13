@@ -1,25 +1,28 @@
 import "./styles.css";
 import { Paragraph, Document, Packer } from "docx";
 import { saveAs } from "file-saver";
+import split from "./Split";
 //generates doc and holds basic html headers words and stuff
 
 //export default function GenDoc(values) {
 export default function generate(values) {
+  const skills = split(values["skills"]);
   const doc = new Document({
     sections: [
       {
         children: [
           new Paragraph({
-            text: values,
+            text: values["name"],
             bullet: {
               level: 0 //How deep you want the bullet to be
             }
           }),
+          skills,
           new Paragraph({
-            text: "testing",
-            bullet: {
-              level: 0
-            }
+            text: skills
+            // bullet: {
+            //   level: 0
+            // }
           })
         ]
       }

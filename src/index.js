@@ -21,11 +21,26 @@ const InputField = React.forwardRef((props, ref) => {
   return <input {...getInputProps({ ref, ...rest })} />;
 });
 
+const AreaField = React.forwardRef((props, ref) => {
+  // Let's use splitFormProps to get form-specific props
+  const [field, fieldOptions, rest] = splitFormProps(props);
+
+  // Use the useField hook with a field and field options
+  // to access field state
+  const {
+    //meta: { error, isTouched, isValidating, message },
+    getInputProps
+  } = useField(field, fieldOptions);
+
+  // Build the field
+  return <textarea {...getInputProps({ ref, ...rest })} />;
+});
+
 function App() {
   const defaultValues = React.useMemo(
     () => ({
-      name: "tanne",
-      age: "29",
+      name: "Alex",
+      phone: "248-345-2390",
       email: "tanner@gmail.com",
       friends: ["jaylen"]
     }),
@@ -39,16 +54,10 @@ function App() {
     meta: { isSubmitting, isSubmitted, canSubmit, error }
   } = useForm({
     defaultValues,
-    // validate: values => {
-    //   if (values.name === "tanner" && values.age !== "29") {
-    //     return "This is not tanner's correct age";
-    //   }
-    //   return false;
-    // },
     onSubmit: async (values, instance) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(values);
-      generate(values["name"]);
+      generate(values);
     },
     debugForm: true
   });
@@ -67,8 +76,7 @@ function App() {
 
       <div>
         <label>
-          Notes:{" "}
-          <InputField field="other.notes" defaultValue="This is a note." />
+          Expertise: <AreaField field="skills" defaultValue="This is a note." />
         </label>
       </div>
       <div>
