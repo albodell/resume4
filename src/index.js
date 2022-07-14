@@ -40,9 +40,12 @@ function App() {
   const defaultValues = React.useMemo(
     () => ({
       name: "Alex",
-      phone: "248-345-2390",
-      email: "tanner@gmail.com",
-      friends: ["jaylen"]
+      phone: "248-568-8923",
+      email: "Alex@gmail.com",
+      experience: ["Engineer"],
+      company: ["eshocan"],
+      date: ["6/12/2020"],
+      duties: ["This is a note."]
     }),
     []
   );
@@ -76,32 +79,39 @@ function App() {
 
       <div>
         <label>
-          Expertise: <AreaField field="skills" defaultValue="This is a note." />
+          Technical Expertise:{" "}
+          <AreaField field="skills" defaultValue="This is a note." />
         </label>
       </div>
       <div>
-        Friends
+        Experience
         <div
           style={{
             border: "1px solid black",
             padding: "1rem"
           }}
         >
-          {values.friends.map((friend, i) => (
+          {values.experience.map((job, i) => (
             <div key={i}>
               <label>
-                Friend: <InputField field={`friends.${i}`} />{" "}
+                Job Title: <InputField field={`experience.${i}`} /> Company:{" "}
+                <InputField field={`company.${i}`} /> Date:{" "}
+                <InputField field={`date.${i}`} /> Duties:{" "}
+                <AreaField field={`duties.${i}`} />{" "}
                 <button
                   type="button"
-                  onClick={() => removeFieldValue("friends", i)}
+                  onClick={() => removeFieldValue("experience", i)}
                 >
                   X
                 </button>
               </label>
             </div>
           ))}
-          <button type="button" onClick={() => pushFieldValue("friends", "")}>
-            Add Friend
+          <button
+            type="button"
+            onClick={() => pushFieldValue("experience", "")}
+          >
+            Add Job
           </button>
         </div>
       </div>

@@ -2,11 +2,18 @@ import "./styles.css";
 import { Paragraph, Document, Packer } from "docx";
 import { saveAs } from "file-saver";
 import split from "./Split";
+import jobFormat from "./JobFormat";
 //generates doc and holds basic html headers words and stuff
 
 //export default function GenDoc(values) {
 export default function generate(values) {
   const skills = split(values["skills"]);
+  const experience = jobFormat(
+    values["experience"],
+    values["company"],
+    values["date"],
+    values["duties"]
+  );
   const doc = new Document({
     sections: [
       {
@@ -18,6 +25,7 @@ export default function generate(values) {
             }
           }),
           skills,
+          experience,
           new Paragraph({
             text: skills
             // bullet: {

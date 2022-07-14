@@ -4,7 +4,11 @@ button {
   font-size: 20px;
   font-family: sans-serif;
 }
+body {
+  padding: 20px;
 
+  background-color: #dcfadf;
+}
 div {
   margin: 0 0 1rem;
 }
@@ -12,6 +16,10 @@ div {
 input,
 textarea,
 button {
+  display: table-column;
+  font-family: sans-serif;
+  margin: auto;
+  background-color: #f7f6eb;
   padding: 0.3rem;
   border: solid 2px black;
   border-radius: 0.2rem;
@@ -23,5 +31,6 @@ textarea {
   height: 150px;
 }
 label {
+  text-align: center;
   display: block;
 }
